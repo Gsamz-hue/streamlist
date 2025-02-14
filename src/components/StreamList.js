@@ -1,36 +1,74 @@
 import React, { useState } from "react";
+import { FaEdit, FaTrash, FaCheck } from "react-icons/fa";
+import "../App.css"; // ✅ Corrected path to App.css (Moves one level up)
 
-function StreamList() {
-  const [stream, setStream] = useState("");
-  const [streamList, setStreamList] = useState([]);
+const StreamList = () => {
+  const [input, setInput] = useState("");
+  const [events, setEvents] = useState([]);
 
-  const handleAddStream = () => {
-    if (stream.trim() !== "") {
-      setStreamList([...streamList, stream]);
-      setStream("");
+  const handleAddEvent = () => {
+    if (input.trim() !== "") {
+      setEvents([...events, { text: input, completed: false, id: Date.now() }]);
+      setInput(""); // Clear input field after adding
+    }
+  };
+
+  const handleDelete = (id) => {
+    setEvents(events.filter((event) => event.id !== id));
+  };
+
+  const handleComplete = (id) => {
+    setEvents(
+      events.map((event) =>
+        event.id === id ? { ...event, completed: !event.completed } : event
+      )
+    );
+  };
+
+  const handleEdit = (id) => {
+    const newText = prompt("Edit event:", events.find(event => event.id === id)?.text);
+    if (newText !== null) {
+      setEvents(
+        events.map((event) =>
+          event.id === id ? { ...event, text: newText } : event
+        )
+      );
     }
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>StreamList</h2>
-      <input
-        type="text"
-        value={stream}
-        placeholder="Add a movie or program..."
-        onChange={(e) => setStream(e.target.value)}
-        style={{ marginRight: "10px", padding: "5px" }}
-      />
-      <button onClick={handleAddStream} style={{ padding: "5px 10px" }}>
-        Add
-      </button>
-      <ul style={{ marginTop: "20px" }}>
-        {streamList.map((item, index) => (
-          <li key={index}>{item}</li>
+    <div className="container">
+      <h1>StreamList User Events</h1>
+      <div className="input-container">
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Enter an event..."
+        />
+        <button onClick={handleAddEvent}>Add Event</button>
+      </div>
+
+      <ul>
+        {events.map((event) => (
+          <li key={event.id} className={event.completed ? "completed" : ""}>
+            <span>{event.text}</span>
+            <div className="buttons">
+              <button onClick={() => handleEdit(event.id)} className="edit-btn">
+                <FaEdit />
+              </button>
+              <button onClick={() => handleComplete(event.id)} className="complete-btn">
+                <FaCheck />
+              </button>
+              <button onClick={() => handleDelete(event.id)} className="delete-btn">
+                <FaTrash />
+              </button>
+            </div>
+          </li>
         ))}
       </ul>
     </div>
   );
-}
+};
 
 export default StreamList;
