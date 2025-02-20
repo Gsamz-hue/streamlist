@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaEdit, FaTrash, FaCheck } from "react-icons/fa";
-import "../App.css"; // ✅ Corrected path to App.css (Moves one level up)
+import "../App.css"; // ✅ Ensure CSS is imported
 
 const StreamList = () => {
   const [input, setInput] = useState("");
@@ -9,7 +9,7 @@ const StreamList = () => {
   const handleAddEvent = () => {
     if (input.trim() !== "") {
       setEvents([...events, { text: input, completed: false, id: Date.now() }]);
-      setInput(""); // Clear input field after adding
+      setInput(""); // ✅ Clear input after adding
     }
   };
 

@@ -7,7 +7,7 @@ body {
   padding: 0;
 }
 
-/* Container */
+/* ✅ Fix: Container Styling */
 .container {
   max-width: 500px;
   margin: 30px auto;
@@ -17,7 +17,7 @@ body {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Input Field and Button */
+/* ✅ Fix: Input Field and Button */
 .input-container {
   display: flex;
   justify-content: space-between;
@@ -44,7 +44,7 @@ button:hover {
   background: #0056b3;
 }
 
-/* List Styling */
+/* ✅ Fix: List Styling */
 ul {
   list-style: none;
   padding: 0;
@@ -60,13 +60,14 @@ li {
   border-radius: 5px;
 }
 
-/* Completed Tasks */
+/* ✅ Fix: Completed Tasks (Strikethrough) */
 .completed {
   text-decoration: line-through;
   color: gray;
+  opacity: 0.7;
 }
 
-/* Buttons for Actions */
+/* ✅ Fix: Buttons for Actions */
 .buttons button {
   border: none;
   background: none;
@@ -75,7 +76,7 @@ li {
   margin: 0 5px;
 }
 
-/* Button Hover Effects */
+/* ✅ Fix: Button Hover Effects */
 .edit-btn:hover {
   color: orange;
 }
@@ -88,20 +89,33 @@ li {
   color: red;
 }
 
-/* Navbar */
-nav {
+/* ✅ Fix: Navbar Styling */
+.navbar {
   background: #333;
   padding: 10px;
   text-align: center;
 }
 
-nav a {
-  color: white;
-  text-decoration: none;
-  margin: 10px;
-  font-size: 18px;
+.navbar ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
-nav a:hover {
-  text-decoration: underline;
+.navbar li {
+  display: inline;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 8px 12px;
+}
+
+.navbar a:hover {
+  background: #555;
+  border-radius: 5px;
 }
